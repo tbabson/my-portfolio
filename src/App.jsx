@@ -41,6 +41,15 @@ const App = () => {
     setIsMenuOpen(false);
   };
 
+  const downloadCV = () => {
+    // Option 1: If you have a CV file in your public folder
+    const link = document.createElement("a");
+    link.href =
+      "https://res.cloudinary.com/dwrmehhg3/image/upload/v1752688080/portfolio/babatunde_taiwo_a_ccgxyf.pdf"; // Replace with actual path
+    link.download = "Babatunde_Taiwo_CV.pdf";
+    link.click();
+  };
+
   const projects = [
     {
       title: "E-Commerce Platform",
@@ -410,7 +419,10 @@ const App = () => {
             </a>
           </div>
 
-          <button className="bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:scale-105">
+          <button
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:scale-105"
+            onClick={downloadCV}
+          >
             Download Resume
           </button>
         </div>
