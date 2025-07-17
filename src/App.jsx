@@ -158,11 +158,11 @@ const App = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="animate-pulse mb-8 mt-9">
+          <div className="animate-pulse mb-8">
             {/* <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full mx-auto mb-8 animate-bounce"></div> */}
 
             <div
-              className="w-60 h-60 rounded-full mx-auto mb-8 animate-bounce relative overflow-hidden border-fuchsia-700 border-4 "
+              className="w-60 h-60 rounded-full mx-auto mb-3 mt-6 animate-bounce relative overflow-hidden border-fuchsia-700 border-4 "
               style={{
                 backgroundImage: `linear-gradient(to bottom right, rgba(34, 197, 94, 0.8), rgba(168, 85, 247, 0)), url('https://res.cloudinary.com/dwrmehhg3/image/upload/v1752684375/portfolio/IMG_20241115_1656462_gbrpgi.jpg')`,
                 backgroundSize: "cover",
@@ -171,7 +171,7 @@ const App = () => {
             ></div>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 px-4">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 sm:mt-3 px-4">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Babatunde Taiwo. A
             </span>
