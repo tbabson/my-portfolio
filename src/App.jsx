@@ -162,7 +162,7 @@ const App = () => {
             {/* <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full mx-auto mb-8 animate-bounce"></div> */}
 
             <div
-              className="w-60 h-60 rounded-full mx-auto mb-8 animate-bounce relative overflow-hidden"
+              className="w-60 h-60 rounded-full mx-auto mb-8 animate-bounce relative overflow-hidden border-fuchsia-700 border-4 "
               style={{
                 backgroundImage: `linear-gradient(to bottom right, rgba(34, 197, 94, 0.8), rgba(168, 85, 247, 0)), url('https://res.cloudinary.com/dwrmehhg3/image/upload/v1752684375/portfolio/IMG_20241115_1656462_gbrpgi.jpg')`,
                 backgroundSize: "cover",
