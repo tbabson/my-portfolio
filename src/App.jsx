@@ -158,7 +158,7 @@ const App = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="animate-pulse mb-8">
+          <div className="animate-pulse mb-4">
             {/* <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full mx-auto mb-8 animate-bounce"></div> */}
 
             <div
