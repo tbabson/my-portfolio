@@ -161,40 +161,40 @@ const App = () => {
             <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full mx-auto mb-8 animate-bounce"></div>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 px-4">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               Babatunde Taiwo. A
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-8">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 sm:mb-8">
             MERN Stack Developer
           </p>
 
-          <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
             Passionate about building modern web applications with cutting-edge
             technologies. Specialized in React, Node.js, and creating seamless
             user experiences.
           </p>
 
-          <div className="flex justify-center space-x-6 mb-12">
+          <div className="flex justify-center space-x-4 sm:space-x-6 mb-8 sm:mb-12">
             <a
               href="https://github.com/tbabson"
-              className="p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
+              className="p-2 sm:p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
             >
-              <Github size={24} />
+              <Github size={20} className="sm:w-6 sm:h-6" />
             </a>
             <a
               href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
-              className="p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
+              className="p-2 sm:p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
             >
-              <Linkedin size={24} />
+              <Linkedin size={20} className="sm:w-6 sm:h-6" />
             </a>
             <a
               href="mailto:babatunde.taiwoadekunle@gmail.com"
-              className="p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
+              className="p-2 sm:p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
             >
-              <Mail size={24} />
+              <Mail size={20} className="sm:w-6 sm:h-6" />
             </a>
           </div>
 
@@ -220,9 +220,9 @@ const App = () => {
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-lg text-gray-300 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center px-4 sm:px-0">
+            <div className="space-y-4 sm:space-y-6">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 I'm a passionate junior MERN stack developer with a strong
                 foundation in modern web technologies. My journey began with
                 curiosity about how websites work, and it has evolved into a
@@ -273,11 +273,11 @@ const App = () => {
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-0">
             {skills.map((skill, index) => (
               <div
                 key={skill.name}
-                className="bg-slate-800/50 p-6 rounded-xl hover:bg-slate-800/70 transition-all hover:scale-105"
+                className="bg-slate-800/50 p-4 sm:p-6 rounded-xl hover:bg-slate-800/70 transition-all hover:scale-105 shadow-lg"
               >
                 <div className="flex items-center mb-4">
                   <skill.icon className="text-cyan-400 mr-3" size={24} />
@@ -309,11 +309,11 @@ const App = () => {
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-0">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="bg-slate-800/50 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group"
+                className="bg-slate-800/50 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group shadow-lg"
               >
                 <div className="h-48 relative overflow-hidden">
                   {project.image ? (
@@ -402,20 +402,22 @@ const App = () => {
             Let's connect and build something amazing together!
           </p>
 
-          <div className="flex justify-center space-x-8 mb-12">
+          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-12">
             <a
               href="mailto:babatunde.taiwoadekunle@gmail.com"
-              className="flex items-center space-x-3 bg-slate-800 px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105"
+              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0"
             >
-              <Mail className="text-cyan-400" />
-              <span>babatunde.taiwoadekunle@gmail.com</span>
+              <Mail className="text-cyan-400 flex-shrink-0" />
+              <span className="text-sm sm:text-base truncate">
+                babatunde.taiwoadekunle@gmail.com
+              </span>
             </a>
             <a
               href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
-              className="flex items-center space-x-3 bg-slate-800 px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105"
+              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0"
             >
-              <Linkedin className="text-cyan-400" />
-              <span>LinkedIn</span>
+              <Linkedin className="text-cyan-400 flex-shrink-0" />
+              <span className="text-sm sm:text-base">LinkedIn</span>
             </a>
           </div>
 
