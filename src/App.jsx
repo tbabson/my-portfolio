@@ -11,6 +11,7 @@ import {
   ChevronDown,
   Menu,
   X,
+  Phone,
 } from "lucide-react";
 
 const App = () => {
@@ -411,7 +412,7 @@ const App = () => {
             Let's connect and build something amazing together!
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-12">
+          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-12 ">
             <a
               href="mailto:babatunde.taiwoadekunle@gmail.com"
               className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0"
@@ -427,6 +428,13 @@ const App = () => {
             >
               <Linkedin className="text-cyan-400 flex-shrink-0" />
               <span className="text-sm sm:text-base">LinkedIn</span>
+            </a>
+            <a
+              href="tel:+2347035689102"
+              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0"
+            >
+              <Phone className="text-cyan-400 flex-shrink-0" />
+              <span className="text-sm sm:text-base">+2347035689102</span>
             </a>
           </div>
 
