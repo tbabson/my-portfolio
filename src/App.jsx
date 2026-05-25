@@ -43,10 +43,9 @@ const App = () => {
   };
 
   const downloadCV = () => {
-    // Option 1: If you have a CV file in your public folder
     const link = document.createElement("a");
     link.href =
-      "https://res.cloudinary.com/dwrmehhg3/image/upload/v1752688080/portfolio/babatunde_taiwo_a_ccgxyf.pdf"; // Replace with actual path
+      "https://res.cloudinary.com/dwrmehhg3/image/upload/v1752688080/portfolio/babatunde_taiwo_a_ccgxyf.pdf";
     link.download = "Babatunde_Taiwo_CV.pdf";
     link.click();
   };
@@ -55,43 +54,61 @@ const App = () => {
     {
       title: "E-Commerce Platform",
       description:
-        "Full-stack MERN application with user authentication, payment integration, and admin dashboard.",
+        "Full-stack MERN application with user authentication, payment integration via Stripe, and a feature-rich admin dashboard for managing orders and products.",
       tech: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
       github: "https://github.com/tbabson/mealmaster",
       live: "https://mealmaster-52wg.onrender.com",
       image:
-        "https://res.cloudinary.com/dwrmehhg3/image/upload/v1752685116/portfolio/Screenshot-2025-07-16-165659_nw80tt.jpg", //Add your project image path
+        "https://res.cloudinary.com/dwrmehhg3/image/upload/v1752685116/portfolio/Screenshot-2025-07-16-165659_nw80tt.jpg",
       fallbackColor: "bg-gradient-to-br from-purple-500 to-pink-600",
+      status: "live",
     },
     {
       title: "Job Board",
       description:
-        "Job listing platform with user authentication, job posting, and application management.",
+        "Job listing platform with user authentication, job posting, and a full application management workflow for both employers and candidates.",
       tech: ["React", "Redux", "Express", "MongoDB"],
       github: "https://github.com/tbabson/Jobify",
       live: "https://jobify-d6ws.onrender.com",
       image:
         "https://res.cloudinary.com/dwrmehhg3/image/upload/v1752684374/portfolio/Screenshot_2025-07-16_165753_ogirti.png",
       fallbackColor: "bg-gradient-to-br from-blue-500 to-cyan-600",
+      status: "live",
     },
     {
-      title: "Social Media Dashboard",
+      title: "SlimPix",
       description:
-        "Analytics dashboard for social media metrics with interactive charts and data visualization.",
-      tech: ["React", "Chart.js", "Node.js", "PostgreSQL", "JWT"],
-      github: "#",
-      live: "#",
-      image: "bg-gradient-to-br from-green-500 to-teal-600",
+        "Fast, client-friendly image compression and conversion web app. Batch-process up to 10 images, choose quality presets, convert formats (JPG, PNG, WebP), and download all results in a single ZIP file. Processed images auto-delete after 5 hours.",
+      tech: ["React", "Node.js", "Express", "MongoDB", "Sharp"],
+      github: "https://github.com/tbabson/slim-pix",
+      live: "https://slim-pix.vercel.app/",
+      image: null,
+      fallbackColor: "bg-gradient-to-br from-orange-500 to-rose-600",
+      status: "live",
+    },
+    {
+      title: "WorkPlace",
+      description:
+        "Comprehensive internal HR and operations platform covering GPS-based attendance with geofencing, project & task management, real-time WebSocket chat, leave requests, payroll supplements, memos, expense claims, and role-based access control.",
+      tech: ["React", "TypeScript", "Go", "PostgreSQL", "Redis", "WebSocket"],
+      github: null,
+      live: null,
+      image: null,
+      fallbackColor: "bg-gradient-to-br from-indigo-500 to-violet-700",
+      status: "development",
     },
   ];
 
   const skills = [
     { name: "React", icon: Code2, level: 85 },
-    { name: "Node.js", icon: Server, level: 80 },
-    { name: "MongoDB", icon: Database, level: 75 },
-    { name: "Express", icon: Globe, level: 80 },
     { name: "JavaScript", icon: Code2, level: 90 },
-    { name: "HTML/CSS", icon: Code2, level: 95 },
+    { name: "TypeScript", icon: Code2, level: 75 },
+    { name: "Node.js", icon: Server, level: 80 },
+    { name: "Go", icon: Server, level: 70 },
+    { name: "Express", icon: Globe, level: 80 },
+    { name: "MongoDB", icon: Database, level: 75 },
+    { name: "PostgreSQL", icon: Database, level: 70 },
+    { name: "HTML / CSS", icon: Code2, level: 95 },
   ];
 
   return (
@@ -158,11 +175,9 @@ const App = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="animate-pulse mb-4">
-            {/* <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-full mx-auto mb-8 animate-bounce"></div> */}
-
+          <div className="mb-4">
             <div
-              className="w-60 h-60 rounded-full mx-auto mb-3 mt-6 animate-bounce relative overflow-hidden border-fuchsia-700 border-4 "
+              className="w-60 h-60 rounded-full mx-auto mb-3 mt-6 animate-bounce relative overflow-hidden border-fuchsia-700 border-4"
               style={{
                 backgroundImage: `linear-gradient(to bottom right, rgba(34, 197, 94, 0.8), rgba(168, 85, 247, 0)), url('https://res.cloudinary.com/dwrmehhg3/image/upload/v1752684375/portfolio/IMG_20241115_1656462_gbrpgi.jpg')`,
                 backgroundSize: "cover",
@@ -178,24 +193,28 @@ const App = () => {
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 sm:mb-8">
-            MERN Stack Developer
+            Full-Stack Developer
           </p>
 
           <p className="text-base sm:text-lg text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
-            Passionate about building modern web applications with cutting-edge
-            technologies. Specialized in React, Node.js, and creating seamless
-            user experiences.
+            I build modern web applications end-to-end — from polished React
+            frontends to performant Go and Node.js backends. Focused on clean
+            code, real-world features, and great user experiences.
           </p>
 
           <div className="flex justify-center space-x-4 sm:space-x-6 mb-8 sm:mb-12">
             <a
               href="https://github.com/tbabson"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-2 sm:p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
             >
               <Github size={20} className="sm:w-6 sm:h-6" />
             </a>
             <a
               href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-2 sm:p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
             >
               <Linkedin size={20} className="sm:w-6 sm:h-6" />
@@ -233,30 +252,30 @@ const App = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center px-4 sm:px-0">
             <div className="space-y-4 sm:space-y-6">
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                I'm a passionate junior MERN stack developer with a strong
-                foundation in modern web technologies. My journey began with
-                curiosity about how websites work, and it has evolved into a
-                deep love for creating elegant, functional applications.
+                I'm a full-stack developer with hands-on experience across the
+                JavaScript ecosystem and beyond. My journey started with
+                curiosity about how the web works and has grown into a love for
+                building clean, production-ready applications.
               </p>
 
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I specialize in building full-stack applications using MongoDB,
-                Express.js, React, and Node.js. I'm constantly learning new
-                technologies and best practices to stay current with the rapidly
-                evolving web development landscape.
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
+                I build with React and TypeScript on the frontend, Node.js and
+                Go on the backend, and I'm comfortable working with both SQL and
+                NoSQL databases. I'm always pushing to learn new tools and ship
+                software that genuinely solves problems.
               </p>
 
               <div className="grid grid-cols-2 gap-4 mt-8">
-                <div className="bg-slate-800/50 p-4 rounded-lg">
+                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
                   <h3 className="font-semibold text-cyan-400 mb-2">Frontend</h3>
                   <p className="text-sm text-gray-300">
-                    React, JavaScript, HTML, CSS, Tailwind
+                    React, TypeScript, Tailwind CSS, Zustand
                   </p>
                 </div>
-                <div className="bg-slate-800/50 p-4 rounded-lg">
+                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
                   <h3 className="font-semibold text-cyan-400 mb-2">Backend</h3>
                   <p className="text-sm text-gray-300">
-                    Node.js, Express, MongoDB, REST APIs
+                    Node.js, Go, PostgreSQL, MongoDB, Redis
                   </p>
                 </div>
               </div>
@@ -284,10 +303,10 @@ const App = () => {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-0">
-            {skills.map((skill, index) => (
+            {skills.map((skill) => (
               <div
                 key={skill.name}
-                className="bg-slate-800/50 p-4 sm:p-6 rounded-xl hover:bg-slate-800/70 transition-all hover:scale-105 shadow-lg"
+                className="bg-slate-800/50 p-4 sm:p-6 rounded-xl hover:bg-slate-800/70 transition-all hover:scale-105 shadow-lg border border-slate-700/40"
               >
                 <div className="flex items-center mb-4">
                   <skill.icon className="text-cyan-400 mr-3" size={24} />
@@ -301,9 +320,7 @@ const App = () => {
                   ></div>
                 </div>
 
-                <p className="text-sm text-gray-400">
-                  {skill.level}% Proficiency
-                </p>
+                <p className="text-sm text-gray-400">{skill.level}% Proficiency</p>
               </div>
             ))}
           </div>
@@ -313,19 +330,24 @@ const App = () => {
       {/* Projects Section */}
       <section id="projects" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-4">
             <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               Featured Projects
             </span>
           </h2>
+          <p className="text-center text-gray-400 mb-16">
+            A selection of things I've built — from side projects to full-scale
+            platforms.
+          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 sm:px-0">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="bg-slate-800/50 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group shadow-lg"
+                className="bg-slate-800/50 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 group border border-slate-700/50 hover:border-slate-600/80 flex flex-col"
               >
-                <div className="h-48 relative overflow-hidden">
+                {/* Image / Gradient fallback */}
+                <div className="h-52 relative overflow-hidden flex-shrink-0">
                   {project.image ? (
                     <>
                       <img
@@ -333,7 +355,6 @@ const App = () => {
                         alt={project.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         onError={(e) => {
-                          // Hide image and show fallback on load error
                           e.target.style.display = "none";
                           e.target.nextSibling.style.display = "flex";
                         }}
@@ -341,55 +362,90 @@ const App = () => {
                       <div
                         className={`w-full h-full ${project.fallbackColor} hidden items-center justify-center`}
                       >
-                        <div className="text-white text-6xl font-bold opacity-20 group-hover:opacity-40 transition-opacity">
-                          {index + 1}
-                        </div>
+                        <span className="text-white text-7xl font-black opacity-20 group-hover:opacity-30 transition-opacity">
+                          {project.title.charAt(0)}
+                        </span>
                       </div>
                     </>
                   ) : (
-                    // Show fallback directly if no image URL
                     <div
                       className={`w-full h-full ${project.fallbackColor} flex items-center justify-center`}
                     >
-                      <div className="text-white text-6xl font-bold opacity-20 group-hover:opacity-40 transition-opacity">
-                        {index + 1}
-                      </div>
+                      <span className="text-white text-7xl font-black opacity-20 group-hover:opacity-30 transition-opacity">
+                        {project.title.charAt(0)}
+                      </span>
                     </div>
                   )}
+
+                  {/* Status badge */}
+                  <div className="absolute top-3 right-3">
+                    {project.status === "live" ? (
+                      <span className="flex items-center gap-1.5 bg-emerald-500/90 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">
+                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+                        Live
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-1.5 bg-amber-500/90 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">
+                        <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
+                        In Development
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-3">
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-gray-300 mb-4">{project.description}</p>
+                  <p className="text-gray-400 mb-5 leading-relaxed text-sm flex-1">
+                    {project.description}
+                  </p>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-2 mb-5">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-slate-700 text-sm rounded-full"
+                        className="px-2.5 py-1 bg-slate-700/70 text-cyan-300 text-xs font-medium rounded-lg border border-slate-600/50"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="flex space-x-4">
-                    <a
-                      href={project.github}
-                      className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors"
-                    >
-                      <Github size={16} className="mr-1" />
-                      Code
-                    </a>
-                    <a
-                      href={project.live}
-                      className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
-                    >
-                      <ExternalLink size={16} className="mr-1" />
-                      Live Demo
-                    </a>
+                  <div className="flex items-center gap-6 pt-4 border-t border-slate-700/50">
+                    {project.github ? (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 transition-colors font-medium"
+                      >
+                        <Github size={15} />
+                        Source Code
+                      </a>
+                    ) : (
+                      <span className="flex items-center gap-1.5 text-sm text-gray-600 select-none">
+                        <Github size={15} />
+                        Private Repo
+                      </span>
+                    )}
+
+                    {project.live ? (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-sm text-purple-400 hover:text-purple-300 transition-colors font-medium"
+                      >
+                        <ExternalLink size={15} />
+                        Live Demo
+                      </a>
+                    ) : (
+                      <span className="flex items-center gap-1.5 text-sm text-gray-600 select-none">
+                        <ExternalLink size={15} />
+                        Coming Soon
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -412,10 +468,10 @@ const App = () => {
             Let's connect and build something amazing together!
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-12 ">
+          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-12">
             <a
               href="mailto:babatunde.taiwoadekunle@gmail.com"
-              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0"
+              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0 border border-slate-700/50"
             >
               <Mail className="text-cyan-400 flex-shrink-0" />
               <span className="text-sm sm:text-base truncate">
@@ -424,14 +480,16 @@ const App = () => {
             </a>
             <a
               href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
-              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0 border border-slate-700/50"
             >
               <Linkedin className="text-cyan-400 flex-shrink-0" />
               <span className="text-sm sm:text-base">LinkedIn</span>
             </a>
             <a
               href="tel:+2347035689102"
-              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0"
+              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0 border border-slate-700/50"
             >
               <Phone className="text-cyan-400 flex-shrink-0" />
               <span className="text-sm sm:text-base">+2347035689102</span>
