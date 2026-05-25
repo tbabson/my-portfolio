@@ -253,24 +253,32 @@ const App = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center px-4 sm:px-0">
             <div className="space-y-4 sm:space-y-6">
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                I'm a full-stack developer with hands-on experience across the
-                JavaScript ecosystem and beyond. My journey started with
-                curiosity about how the web works and has grown into a love for
-                building clean, production-ready applications.
+                Full-Stack Software Engineer skilled in JavaScript and Go, with
+                hands-on experience building production-grade web applications
+                across the MERN stack and Go-based backend services. Has shipped
+                four full-stack projects — including a containerized HR &
+                operations platform with a Go API, PostgreSQL, Redis, and
+                real-time WebSockets. Brings nearly a decade of running
+                production websites, e-commerce platforms, and SEO as a digital
+                professional, now applied to engineering. Comfortable
+                end-to-end: React frontends; Node.js/Express and Go backends;
+                PostgreSQL, MongoDB, and Redis; and Docker and Nginx for
+                deployment. Seeking a remote full-stack or backend engineering
+                role.
               </p>
 
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                I build with React and TypeScript on the frontend, Node.js and
-                Go on the backend, and I'm comfortable working with both SQL and
-                NoSQL databases. I'm always pushing to learn new tools and ship
-                software that genuinely solves problems.
+                I build with React and Javascript/TypeScript on the frontend,
+                Node.js and Go on the backend, and I'm comfortable working with
+                both SQL and NoSQL databases. I'm always pushing to learn new
+                tools and ship software that genuinely solves problems.
               </p>
 
               <div className="grid grid-cols-2 gap-4 mt-8">
                 <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
                   <h3 className="font-semibold text-cyan-400 mb-2">Frontend</h3>
                   <p className="text-sm text-gray-300">
-                    React, TypeScript, Tailwind CSS, Zustand
+                    React, Javascript/TypeScript, Tailwind CSS, Zustand
                   </p>
                 </div>
                 <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
