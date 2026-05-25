@@ -32,7 +32,9 @@ const TerminalWindow = () => (
         <span className="text-emerald-400">❯ </span>
         <span className="text-gray-300">whoami</span>
       </div>
-      <p className="text-cyan-400 pl-4">Babatunde Taiwo · Full-Stack Developer</p>
+      <p className="text-cyan-400 pl-4">
+        Babatunde Taiwo · Full-Stack Developer
+      </p>
 
       <div>
         <span className="text-emerald-400">❯ </span>
@@ -40,13 +42,15 @@ const TerminalWindow = () => (
       </div>
       <div className="pl-4 space-y-1 text-gray-400">
         <p>
-          <span className="text-purple-400">▸ </span>React · TypeScript · Tailwind CSS
+          <span className="text-purple-400">▸ </span>React · TypeScript ·
+          Tailwind CSS
         </p>
         <p>
-          <span className="text-purple-400">▸ </span>Node.js · Express · Go (chi)
+          <span className="text-purple-400">▸ </span>Node.js · Express · Go
         </p>
         <p>
-          <span className="text-purple-400">▸ </span>PostgreSQL · MongoDB · Redis
+          <span className="text-purple-400">▸ </span>PostgreSQL · MongoDB ·
+          Redis
         </p>
         <p>
           <span className="text-purple-400">▸ </span>Docker · Nginx · Linux
@@ -116,9 +120,9 @@ const App = () => {
           setDisplayRole(
             deleting
               ? current.slice(0, displayRole.length - 1)
-              : current.slice(0, displayRole.length + 1)
+              : current.slice(0, displayRole.length + 1),
           ),
-        deleting ? 40 : 90
+        deleting ? 40 : 90,
       );
     }
     return () => clearTimeout(t);
@@ -178,7 +182,16 @@ const App = () => {
       title: "WorkPlace",
       description:
         "Comprehensive internal HR and operations platform covering GPS-based attendance with geofencing, project & task management, real-time WebSocket chat, leave requests, payroll supplements, memos, expense claims, and role-based access control.",
-      tech: ["React", "TypeScript", "Go", "PostgreSQL", "Redis", "WebSocket"],
+      tech: [
+        "React",
+        "TypeScript",
+        "Go",
+        "PostgreSQL",
+        "Redis",
+        "WebSocket",
+        "Docker",
+        "Nginx",
+      ],
       github: null,
       live: null,
       image: null,
@@ -499,8 +512,8 @@ const App = () => {
                 PostgreSQL, Redis, and real-time WebSockets. I bring a
                 designer's eye to the frontend and a systems thinker's approach
                 to the backend. Previously spent nearly a decade running
-                production websites, e-commerce platforms, and digital
-                marketing — now applied to engineering.
+                production websites, e-commerce platforms, and digital marketing
+                — now applied to engineering.
               </p>
 
               {/* Stats */}
@@ -767,8 +780,8 @@ const App = () => {
             </span>
           </h2>
           <p className="text-gray-400 mb-12 max-w-md mx-auto text-sm leading-relaxed">
-            I'm always open to new opportunities and interesting projects.
-            Let's connect and build something great together.
+            I'm always open to new opportunities and interesting projects. Let's
+            connect and build something great together.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
@@ -776,10 +789,7 @@ const App = () => {
               href="mailto:babatunde.taiwoadekunle@gmail.com"
               className="group flex items-center justify-center gap-3 bg-slate-800/80 border border-slate-700/60 px-6 py-3.5 rounded-xl hover:border-cyan-400/50 hover:bg-slate-700/60 transition-all"
             >
-              <Mail
-                size={17}
-                className="text-cyan-400 flex-shrink-0"
-              />
+              <Mail size={17} className="text-cyan-400 flex-shrink-0" />
               <span className="text-sm text-gray-300 group-hover:text-white transition-colors truncate">
                 babatunde.taiwoadekunle@gmail.com
               </span>
@@ -819,7 +829,7 @@ const App = () => {
       <footer className="py-8 px-4 border-t border-slate-800">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-600 text-sm">
-            © 2025 Babatunde Taiwo A. Built with React & Tailwind CSS.
+            © 2026 Babatunde Taiwo A. Built with React & Tailwind CSS.
           </p>
           <div className="flex items-center gap-4">
             <a
