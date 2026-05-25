@@ -82,7 +82,8 @@ const App = () => {
       tech: ["React", "Node.js", "Express", "MongoDB", "Sharp"],
       github: "https://github.com/tbabson/slim-pix",
       live: "https://slim-pix.vercel.app/",
-      image: null,
+      image:
+        "https://res.cloudinary.com/dwrmehhg3/image/upload/v1779714985/slim_xybxzw.jpg",
       fallbackColor: "bg-gradient-to-br from-orange-500 to-rose-600",
       status: "live",
     },
@@ -136,7 +137,7 @@ const App = () => {
                   >
                     {item}
                   </button>
-                )
+                ),
               )}
             </div>
 
@@ -161,7 +162,7 @@ const App = () => {
                   >
                     {item}
                   </button>
-                )
+                ),
               )}
             </div>
           )}
@@ -320,7 +321,9 @@ const App = () => {
                   ></div>
                 </div>
 
-                <p className="text-sm text-gray-400">{skill.level}% Proficiency</p>
+                <p className="text-sm text-gray-400">
+                  {skill.level}% Proficiency
+                </p>
               </div>
             ))}
           </div>
