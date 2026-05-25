@@ -12,6 +12,9 @@ import {
   Menu,
   X,
   Phone,
+  Terminal,
+  Zap,
+  Palette,
 } from "lucide-react";
 
 const App = () => {
@@ -100,16 +103,92 @@ const App = () => {
     },
   ];
 
-  const skills = [
-    { name: "React", icon: Code2, level: 85 },
-    { name: "JavaScript", icon: Code2, level: 90 },
-    { name: "TypeScript", icon: Code2, level: 75 },
-    { name: "Node.js", icon: Server, level: 80 },
-    { name: "Go", icon: Server, level: 70 },
-    { name: "Express", icon: Globe, level: 80 },
-    { name: "MongoDB", icon: Database, level: 75 },
-    { name: "PostgreSQL", icon: Database, level: 70 },
-    { name: "HTML / CSS", icon: Code2, level: 95 },
+  const skillCategories = [
+    {
+      category: "Languages",
+      icon: Code2,
+      color: "text-cyan-400",
+      border: "border-cyan-400/30",
+      bg: "bg-cyan-400/10",
+      skills: [
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "Go (Golang)",
+        "SQL",
+        "HTML5",
+        "CSS3",
+      ],
+    },
+    {
+      category: "Frontend",
+      icon: Globe,
+      color: "text-purple-400",
+      border: "border-purple-400/30",
+      bg: "bg-purple-400/10",
+      skills: [
+        "React",
+        "Redux Toolkit",
+        "Zustand",
+        "React Query",
+        "Tailwind CSS",
+        "Vite",
+        "Responsive Web Design",
+      ],
+    },
+    {
+      category: "Backend",
+      icon: Server,
+      color: "text-blue-400",
+      border: "border-blue-400/30",
+      bg: "bg-blue-400/10",
+      skills: [
+        "Node.js",
+        "Express",
+        "Go",
+        "RESTful APIs",
+        "WebSockets",
+        "JWT Auth",
+      ],
+    },
+    {
+      category: "Databases",
+      icon: Database,
+      color: "text-emerald-400",
+      border: "border-emerald-400/30",
+      bg: "bg-emerald-400/10",
+      skills: ["PostgreSQL (pgx)", "MongoDB (Mongoose)", "Redis"],
+    },
+    {
+      category: "DevOps & Tools",
+      icon: Terminal,
+      color: "text-orange-400",
+      border: "border-orange-400/30",
+      bg: "bg-orange-400/10",
+      skills: ["Docker", "Docker Compose", "Nginx", "Git & GitHub", "Linux"],
+    },
+    {
+      category: "Integrations",
+      icon: Zap,
+      color: "text-pink-400",
+      border: "border-pink-400/30",
+      bg: "bg-pink-400/10",
+      skills: [
+        "Stripe",
+        "PayPal",
+        "Google OAuth2 & Calendar",
+        "Cloudinary",
+        "Nodemailer",
+        "Web Push",
+      ],
+    },
+    {
+      category: "Design",
+      icon: Palette,
+      color: "text-rose-300",
+      border: "border-rose-300/30",
+      bg: "bg-rose-300/10",
+      skills: ["Adobe Photoshop", "Adobe Illustrator", "UI / Visual Design"],
+    },
   ];
 
   return (
@@ -194,7 +273,7 @@ const App = () => {
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 sm:mb-8">
-            Full-Stack Developer
+            Full-Stack Software Engineer
           </p>
 
           <p className="text-base sm:text-lg text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
@@ -305,33 +384,43 @@ const App = () => {
       {/* Skills Section */}
       <section id="skills" className="py-20 px-4 bg-slate-800/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">
+          <h2 className="text-4xl font-bold text-center mb-4">
             <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               Skills & Technologies
             </span>
           </h2>
+          <p className="text-center text-gray-400 mb-16">
+            Tools and technologies I work with across the full stack.
+          </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-4 sm:px-0">
-            {skills.map((skill) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 px-4 sm:px-0">
+            {skillCategories.map((cat) => (
               <div
-                key={skill.name}
-                className="bg-slate-800/50 p-4 sm:p-6 rounded-xl hover:bg-slate-800/70 transition-all hover:scale-105 shadow-lg border border-slate-700/40"
+                key={cat.category}
+                className="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600/70 transition-all duration-200 group"
               >
-                <div className="flex items-center mb-4">
-                  <skill.icon className="text-cyan-400 mr-3" size={24} />
-                  <h3 className="text-xl font-semibold">{skill.name}</h3>
-                </div>
-
-                <div className="w-full bg-slate-700 rounded-full h-3 mb-2">
+                <div className="flex items-center gap-3 mb-4">
                   <div
-                    className="bg-gradient-to-r from-cyan-400 to-purple-500 h-3 rounded-full transition-all duration-1000"
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
+                    className={`p-2 rounded-lg ${cat.bg} border ${cat.border}`}
+                  >
+                    <cat.icon size={16} className={cat.color} />
+                  </div>
+                  <h3
+                    className={`font-semibold text-sm tracking-wide uppercase ${cat.color}`}
+                  >
+                    {cat.category}
+                  </h3>
                 </div>
-
-                <p className="text-sm text-gray-400">
-                  {skill.level}% Proficiency
-                </p>
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-2.5 py-1 bg-slate-700/60 text-gray-300 text-xs rounded-md border border-slate-600/40 group-hover:border-slate-500/50 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
