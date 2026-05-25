@@ -17,28 +17,112 @@ import {
   Palette,
 } from "lucide-react";
 
+const TerminalWindow = () => (
+  <div className="bg-slate-950 rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl shadow-purple-900/20">
+    <div className="flex items-center gap-2 px-4 py-3 bg-slate-800/80 border-b border-slate-700/50">
+      <span className="w-3 h-3 rounded-full bg-red-400/80" />
+      <span className="w-3 h-3 rounded-full bg-amber-400/80" />
+      <span className="w-3 h-3 rounded-full bg-emerald-400/80" />
+      <span className="ml-3 text-xs text-slate-500 font-mono tracking-wide">
+        ~/babatunde — bash
+      </span>
+    </div>
+    <div className="p-6 font-mono text-sm leading-relaxed space-y-3">
+      <div>
+        <span className="text-emerald-400">❯ </span>
+        <span className="text-gray-300">whoami</span>
+      </div>
+      <p className="text-cyan-400 pl-4">Babatunde Taiwo · Full-Stack Developer</p>
+
+      <div>
+        <span className="text-emerald-400">❯ </span>
+        <span className="text-gray-300">cat stack.txt</span>
+      </div>
+      <div className="pl-4 space-y-1 text-gray-400">
+        <p>
+          <span className="text-purple-400">▸ </span>React · TypeScript · Tailwind CSS
+        </p>
+        <p>
+          <span className="text-purple-400">▸ </span>Node.js · Express · Go (chi)
+        </p>
+        <p>
+          <span className="text-purple-400">▸ </span>PostgreSQL · MongoDB · Redis
+        </p>
+        <p>
+          <span className="text-purple-400">▸ </span>Docker · Nginx · Linux
+        </p>
+      </div>
+
+      <div>
+        <span className="text-emerald-400">❯ </span>
+        <span className="text-gray-300">status --hire</span>
+      </div>
+      <div className="flex items-center gap-2 pl-4">
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="text-emerald-400">Open to opportunities</span>
+      </div>
+
+      <div className="flex items-center gap-1.5">
+        <span className="text-emerald-400">❯ </span>
+        <span className="w-2 h-4 bg-gray-400/50 animate-pulse rounded-sm" />
+      </div>
+    </div>
+  </div>
+);
+
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [displayRole, setDisplayRole] = useState("");
+  const [roleIdx, setRoleIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  const roles = [
+    "Full-Stack Developer",
+    "Go Backend Engineer",
+    "React Developer",
+    "UI Enthusiast",
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = ["home", "about", "skills", "projects", "contact"];
-      const currentSection =
-        sections.find((section) => {
-          const element = document.getElementById(section);
-          if (element) {
-            const rect = element.getBoundingClientRect();
-            return rect.top <= 100 && rect.bottom >= 100;
+      const current =
+        sections.find((s) => {
+          const el = document.getElementById(s);
+          if (el) {
+            const r = el.getBoundingClientRect();
+            return r.top <= 100 && r.bottom >= 100;
           }
           return false;
         }) || "home";
-      setActiveSection(currentSection);
+      setActiveSection(current);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const current = roles[roleIdx];
+    let t;
+    if (!deleting && displayRole === current) {
+      t = setTimeout(() => setDeleting(true), 2500);
+    } else if (deleting && displayRole === "") {
+      setDeleting(false);
+      setRoleIdx((i) => (i + 1) % roles.length);
+    } else {
+      t = setTimeout(
+        () =>
+          setDisplayRole(
+            deleting
+              ? current.slice(0, displayRole.length - 1)
+              : current.slice(0, displayRole.length + 1)
+          ),
+        deleting ? 40 : 90
+      );
+    }
+    return () => clearTimeout(t);
+  }, [displayRole, deleting, roleIdx]);
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -191,222 +275,315 @@ const App = () => {
     },
   ];
 
+  const navLinks = ["Home", "About", "Skills", "Projects", "Contact"];
+
+  const socialLinks = [
+    {
+      href: "https://github.com/tbabson",
+      icon: Github,
+      label: "GitHub",
+      external: true,
+    },
+    {
+      href: "https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile",
+      icon: Linkedin,
+      label: "LinkedIn",
+      external: true,
+    },
+    {
+      href: "mailto:babatunde.taiwoadekunle@gmail.com",
+      icon: Mail,
+      label: "Email",
+      external: false,
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-lg border-b border-slate-800 z-50">
+    <div className="min-h-screen bg-slate-900 text-white overflow-x-hidden">
+      <style>{`
+        @keyframes spin-ring {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes blob {
+          0%,100% { transform: scale(1) translate(0, 0); }
+          33%     { transform: scale(1.08) translate(28px, -38px); }
+          66%     { transform: scale(0.92) translate(-22px, 22px); }
+        }
+        @keyframes shimmer {
+          0%   { background-position: -200% center; }
+          100% { background-position:  200% center; }
+        }
+        .spin-ring { animation: spin-ring 5s linear infinite; }
+        .blob-1    { animation: blob 9s ease-in-out infinite; }
+        .blob-2    { animation: blob 11s ease-in-out infinite 2s; }
+        .blob-3    { animation: blob 13s ease-in-out infinite 4s; }
+        .dot-grid  {
+          background-image: radial-gradient(circle, #475569 1px, transparent 1px);
+          background-size: 36px 36px;
+        }
+        .dot-grid-sm {
+          background-image: radial-gradient(circle, #334155 1px, transparent 1px);
+          background-size: 28px 28px;
+        }
+      `}</style>
+
+      {/* ── Navigation ─────────────────────────────────────────── */}
+      <nav className="fixed top-0 w-full bg-slate-900/75 backdrop-blur-xl border-b border-slate-800/80 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <div className="text-xl font-black bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent tracking-tight">
               Babatunde Taiwo.
             </div>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
-              {["Home", "About", "Skills", "Projects", "Contact"].map(
-                (item) => (
-                  <button
-                    key={item}
-                    onClick={() => scrollToSection(item.toLowerCase())}
-                    className={`transition-colors hover:text-cyan-400 ${
-                      activeSection === item.toLowerCase()
-                        ? "text-cyan-400"
-                        : "text-gray-300"
-                    }`}
-                  >
-                    {item}
-                  </button>
-                ),
-              )}
+            <div className="hidden md:flex items-center gap-8">
+              {navLinks.map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className={`relative text-sm font-medium pb-1 transition-colors hover:text-cyan-400 ${
+                    activeSection === item.toLowerCase()
+                      ? "text-cyan-400"
+                      : "text-gray-400"
+                  }`}
+                >
+                  {item}
+                  {activeSection === item.toLowerCase() && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full" />
+                  )}
+                </button>
+              ))}
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2"
+              className="md:hidden p-2 text-gray-400 hover:text-white transition-colors"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
 
-          {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-slate-800">
-              {["Home", "About", "Skills", "Projects", "Contact"].map(
-                (item) => (
-                  <button
-                    key={item}
-                    onClick={() => scrollToSection(item.toLowerCase())}
-                    className="block w-full text-left py-2 hover:text-cyan-400 transition-colors"
-                  >
-                    {item}
-                  </button>
-                ),
-              )}
+            <div className="md:hidden py-4 border-t border-slate-800 space-y-1">
+              {navLinks.map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className="block w-full text-left px-3 py-2.5 text-sm text-gray-300 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-colors"
+                >
+                  {item}
+                </button>
+              ))}
             </div>
           )}
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* ── Hero ───────────────────────────────────────────────── */}
       <section
         id="home"
         className="min-h-screen flex items-center justify-center relative overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="mb-4">
+        {/* Animated blobs */}
+        <div className="absolute top-24 -left-24 w-[480px] h-[480px] bg-purple-700 rounded-full opacity-[0.09] blur-3xl blob-1 pointer-events-none" />
+        <div className="absolute top-1/3 -right-24 w-96 h-96 bg-cyan-600 rounded-full opacity-[0.09] blur-3xl blob-2 pointer-events-none" />
+        <div className="absolute bottom-24 left-1/3 w-80 h-80 bg-pink-600 rounded-full opacity-[0.06] blur-3xl blob-3 pointer-events-none" />
+
+        {/* Dot grid */}
+        <div className="absolute inset-0 dot-grid opacity-[0.18] pointer-events-none" />
+
+        {/* Radial vignette */}
+        <div className="absolute inset-0 bg-radial-[ellipse_80%_80%_at_50%_50%] from-transparent to-slate-900/60 pointer-events-none" />
+
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
+          {/* Spinning gradient ring + photo */}
+          <div className="relative w-52 h-52 mb-8 mt-20">
             <div
-              className="w-60 h-60 rounded-full mx-auto mb-3 mt-6 animate-bounce relative overflow-hidden border-fuchsia-700 border-4"
+              className="absolute -inset-[5px] rounded-full spin-ring"
               style={{
-                backgroundImage: `linear-gradient(to bottom right, rgba(34, 197, 94, 0.8), rgba(168, 85, 247, 0)), url('https://res.cloudinary.com/dwrmehhg3/image/upload/v1752684375/portfolio/IMG_20241115_1656462_gbrpgi.jpg')`,
+                background:
+                  "conic-gradient(from 0deg, #06b6d4, #a855f7, #ec4899, #06b6d4)",
+              }}
+            />
+            <div className="absolute inset-[2px] rounded-full bg-slate-900" />
+            <div
+              className="absolute inset-[6px] rounded-full overflow-hidden"
+              style={{
+                backgroundImage: `url('https://res.cloudinary.com/dwrmehhg3/image/upload/v1752684375/portfolio/IMG_20241115_1656462_gbrpgi.jpg')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
-            ></div>
+            />
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 sm:mt-3 px-4">
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          {/* Name */}
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black mb-3 px-4 tracking-tight leading-none">
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">
               Babatunde Taiwo. A
             </span>
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 sm:mb-8">
-            Full-Stack Software Engineer
-          </p>
-
-          <p className="text-base sm:text-lg text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
-            I build modern web applications end-to-end — from polished React
-            frontends to performant Go and Node.js backends. Focused on clean
-            code, real-world features, and great user experiences.
-          </p>
-
-          <div className="flex justify-center space-x-4 sm:space-x-6 mb-8 sm:mb-12">
-            <a
-              href="https://github.com/tbabson"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 sm:p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
-            >
-              <Github size={20} className="sm:w-6 sm:h-6" />
-            </a>
-            <a
-              href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 sm:p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
-            >
-              <Linkedin size={20} className="sm:w-6 sm:h-6" />
-            </a>
-            <a
-              href="mailto:babatunde.taiwoadekunle@gmail.com"
-              className="p-2 sm:p-3 bg-slate-800 rounded-full hover:bg-slate-700 transition-all hover:scale-110"
-            >
-              <Mail size={20} className="sm:w-6 sm:h-6" />
-            </a>
+          {/* Typewriter */}
+          <div className="h-9 flex items-center justify-center mb-6">
+            <span className="text-lg md:text-xl text-gray-300 font-mono tracking-wide">
+              {displayRole}
+              <span className="inline-block w-0.5 h-5 bg-cyan-400 ml-0.5 align-middle animate-pulse" />
+            </span>
           </div>
 
+          <p className="text-base sm:text-lg text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed">
+            I build modern web applications end-to-end — from polished React
+            frontends to performant Go and Node.js backends.
+          </p>
+
+          {/* Social pill links */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            {socialLinks.map(({ href, icon: Icon, label, external }) => (
+              <a
+                key={label}
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+                className="group flex items-center gap-2 px-4 py-2.5 bg-slate-800/70 border border-slate-700/60 rounded-xl hover:border-cyan-400/60 hover:bg-slate-800 transition-all duration-200"
+              >
+                <Icon
+                  size={15}
+                  className="text-gray-400 group-hover:text-cyan-400 transition-colors"
+                />
+                <span className="text-sm text-gray-400 group-hover:text-cyan-400 transition-colors">
+                  {label}
+                </span>
+              </a>
+            ))}
+          </div>
+
+          {/* CTA */}
           <button
             onClick={() => scrollToSection("projects")}
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:scale-105"
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 px-9 py-3.5 rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-purple-500/30 hover:scale-105 transition-all duration-200"
           >
             View My Work
           </button>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown size={32} className="text-gray-400" />
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <ChevronDown size={26} className="text-gray-600" />
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-4">
+      {/* ── About ──────────────────────────────────────────────── */}
+      <section id="about" className="py-28 px-4 relative">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              About Me
-            </span>
-          </h2>
+          <div className="text-center mb-16">
+            <p className="text-xs font-bold tracking-[0.2em] text-cyan-400 uppercase mb-3">
+              Get to know me
+            </p>
+            <h2 className="text-4xl font-bold">
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                About Me
+              </span>
+            </h2>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center px-4 sm:px-0">
-            <div className="space-y-4 sm:space-y-6">
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center px-4 sm:px-0">
+            {/* Left */}
+            <div className="space-y-6">
+              <p className="text-gray-300 leading-relaxed">
                 Full-Stack Software Engineer skilled in JavaScript and Go, with
                 hands-on experience building production-grade web applications
-                across the MERN stack and Go-based backend services. Has shipped
-                four full-stack projects — including a containerized HR &
-                operations platform with a Go API, PostgreSQL, Redis, and
-                real-time WebSockets. Brings nearly a decade of running
-                production websites, e-commerce platforms, and SEO as a digital
-                professional, now applied to engineering. Comfortable
-                end-to-end: React frontends; Node.js/Express and Go backends;
-                PostgreSQL, MongoDB, and Redis; and Docker and Nginx for
-                deployment. Seeking a remote full-stack or backend engineering
-                role.
+                across the MERN stack and Go-based backend services.
+              </p>
+              <p className="text-gray-400 leading-relaxed text-sm">
+                I've shipped multiple full-stack projects — including a
+                containerised HR & operations platform with a Go API,
+                PostgreSQL, Redis, and real-time WebSockets. I bring a
+                designer's eye to the frontend and a systems thinker's approach
+                to the backend. Previously spent nearly a decade running
+                production websites, e-commerce platforms, and digital
+                marketing — now applied to engineering.
               </p>
 
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                I build with React and Javascript/TypeScript on the frontend,
-                Node.js and Go on the backend, and I'm comfortable working with
-                both SQL and NoSQL databases. I'm always pushing to learn new
-                tools and ship software that genuinely solves problems.
-              </p>
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-3 pt-2">
+                {[
+                  { value: "4+", label: "Projects Built" },
+                  { value: "2+", label: "Tech Stacks" },
+                  { value: "15+", label: "Tools & APIs" },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className="text-center p-4 bg-slate-800/60 rounded-xl border border-slate-700/50 hover:border-slate-600/70 transition-colors"
+                  >
+                    <p className="text-2xl font-black bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                      {s.value}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">{s.label}</p>
+                  </div>
+                ))}
+              </div>
 
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                  <h3 className="font-semibold text-cyan-400 mb-2">Frontend</h3>
-                  <p className="text-sm text-gray-300">
-                    React, Javascript/TypeScript, Tailwind CSS, Zustand
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
+                  <h3 className="font-semibold text-cyan-400 mb-1.5 text-xs uppercase tracking-widest">
+                    Frontend
+                  </h3>
+                  <p className="text-xs text-gray-400">
+                    React · TypeScript · Tailwind · Zustand
                   </p>
                 </div>
-                <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50">
-                  <h3 className="font-semibold text-cyan-400 mb-2">Backend</h3>
-                  <p className="text-sm text-gray-300">
-                    Node.js, Go, PostgreSQL, MongoDB, Redis
+                <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
+                  <h3 className="font-semibold text-purple-400 mb-1.5 text-xs uppercase tracking-widest">
+                    Backend
+                  </h3>
+                  <p className="text-xs text-gray-400">
+                    Node.js · Go · PostgreSQL · Redis
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="relative">
-              <div className="w-80 h-80 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 rounded-full mx-auto"></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-64 h-64 bg-gradient-to-br from-slate-800 to-slate-700 rounded-full flex items-center justify-center">
-                  <Code2 size={80} className="text-cyan-400" />
-                </div>
-              </div>
-            </div>
+            {/* Right: Terminal */}
+            <TerminalWindow />
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 bg-slate-800/30">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              Skills & Technologies
-            </span>
-          </h2>
-          <p className="text-center text-gray-400 mb-16">
-            Tools and technologies I work with across the full stack.
-          </p>
+      {/* ── Skills ─────────────────────────────────────────────── */}
+      <section
+        id="skills"
+        className="py-28 px-4 bg-slate-800/30 relative overflow-hidden"
+      >
+        <div className="absolute inset-0 dot-grid-sm opacity-[0.08] pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-xs font-bold tracking-[0.2em] text-purple-400 uppercase mb-3">
+              What I work with
+            </p>
+            <h2 className="text-4xl font-bold">
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                Skills & Technologies
+              </span>
+            </h2>
+            <p className="text-gray-500 mt-3 text-sm">
+              Tools and technologies I use across the full stack.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 px-4 sm:px-0">
             {skillCategories.map((cat) => (
               <div
                 key={cat.category}
-                className="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600/70 transition-all duration-200 group"
+                className="bg-slate-800/60 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600/70 transition-all duration-200 group"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div
                     className={`p-2 rounded-lg ${cat.bg} border ${cat.border}`}
                   >
-                    <cat.icon size={16} className={cat.color} />
+                    <cat.icon size={15} className={cat.color} />
                   </div>
                   <h3
-                    className={`font-semibold text-sm tracking-wide uppercase ${cat.color}`}
+                    className={`font-bold text-xs tracking-[0.15em] uppercase ${cat.color}`}
                   >
                     {cat.category}
                   </h3>
@@ -415,7 +592,7 @@ const App = () => {
                   {cat.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-2.5 py-1 bg-slate-700/60 text-gray-300 text-xs rounded-md border border-slate-600/40 group-hover:border-slate-500/50 transition-colors"
+                      className="px-2.5 py-1 bg-slate-700/60 text-gray-300 text-xs rounded-md border border-slate-600/40 group-hover:border-slate-500/60 transition-colors"
                     >
                       {skill}
                     </span>
@@ -427,24 +604,28 @@ const App = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-4">
+      {/* ── Projects ───────────────────────────────────────────── */}
+      <section id="projects" className="py-28 px-4 relative">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">
-            <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              Featured Projects
-            </span>
-          </h2>
-          <p className="text-center text-gray-400 mb-16">
-            A selection of things I've built — from side projects to full-scale
-            platforms.
-          </p>
+          <div className="text-center mb-16">
+            <p className="text-xs font-bold tracking-[0.2em] text-pink-400 uppercase mb-3">
+              What I've built
+            </p>
+            <h2 className="text-4xl font-bold">
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                Featured Projects
+              </span>
+            </h2>
+            <p className="text-gray-500 mt-3 text-sm">
+              From side projects to full-scale platforms.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 sm:px-0">
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="bg-slate-800/50 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 group border border-slate-700/50 hover:border-slate-600/80 flex flex-col"
+                className="bg-slate-800/50 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 group border border-slate-700/50 hover:border-slate-600/80 flex flex-col"
               >
                 {/* Image / Gradient fallback */}
                 <div className="h-52 relative overflow-hidden flex-shrink-0">
@@ -453,7 +634,7 @@ const App = () => {
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         onError={(e) => {
                           e.target.style.display = "none";
                           e.target.nextSibling.style.display = "flex";
@@ -462,7 +643,7 @@ const App = () => {
                       <div
                         className={`w-full h-full ${project.fallbackColor} hidden items-center justify-center`}
                       >
-                        <span className="text-white text-7xl font-black opacity-20 group-hover:opacity-30 transition-opacity">
+                        <span className="text-white text-8xl font-black opacity-[0.18]">
                           {project.title.charAt(0)}
                         </span>
                       </div>
@@ -471,30 +652,38 @@ const App = () => {
                     <div
                       className={`w-full h-full ${project.fallbackColor} flex items-center justify-center`}
                     >
-                      <span className="text-white text-7xl font-black opacity-20 group-hover:opacity-30 transition-opacity">
+                      <span className="text-white text-8xl font-black opacity-[0.18] group-hover:opacity-[0.28] transition-opacity duration-300">
                         {project.title.charAt(0)}
                       </span>
                     </div>
                   )}
 
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
                   {/* Status badge */}
                   <div className="absolute top-3 right-3">
                     {project.status === "live" ? (
-                      <span className="flex items-center gap-1.5 bg-emerald-500/90 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">
-                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span>
+                      <span className="flex items-center gap-1.5 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
                         Live
                       </span>
                     ) : (
-                      <span className="flex items-center gap-1.5 bg-amber-500/90 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">
-                        <span className="w-1.5 h-1.5 bg-white rounded-full"></span>
+                      <span className="flex items-center gap-1.5 bg-amber-500/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        <span className="w-1.5 h-1.5 bg-white rounded-full" />
                         In Development
                       </span>
                     )}
                   </div>
+
+                  {/* Project number */}
+                  <span className="absolute bottom-3 left-4 text-white/25 text-xs font-mono">
+                    0{index + 1}
+                  </span>
                 </div>
 
                 <div className="p-6 flex flex-col flex-1">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-cyan-400 transition-colors duration-200">
                     {project.title}
                   </h3>
                   <p className="text-gray-400 mb-5 leading-relaxed text-sm flex-1">
@@ -518,7 +707,7 @@ const App = () => {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 transition-colors font-medium"
+                        className="flex items-center gap-1.5 text-sm text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
                       >
                         <Github size={15} />
                         Source Code
@@ -535,7 +724,7 @@ const App = () => {
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-purple-400 hover:text-purple-300 transition-colors font-medium"
+                        className="flex items-center gap-1.5 text-sm text-purple-400 hover:text-purple-300 font-medium transition-colors"
                       >
                         <ExternalLink size={15} />
                         Live Demo
@@ -554,27 +743,44 @@ const App = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 bg-slate-800/30">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8">
+      {/* ── Contact ────────────────────────────────────────────── */}
+      <section
+        id="contact"
+        className="py-28 px-4 bg-slate-800/30 relative overflow-hidden"
+      >
+        {/* Top gradient line */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
+        <div className="absolute inset-0 dot-grid-sm opacity-[0.05] pointer-events-none" />
+
+        <div className="relative max-w-4xl mx-auto text-center z-10">
+          {/* Availability badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-full mb-8">
+            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-emerald-400 text-sm font-medium">
+              Available for new opportunities
+            </span>
+          </div>
+
+          <h2 className="text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               Let's Work Together
             </span>
           </h2>
-
-          <p className="text-xl text-gray-300 mb-12">
-            I'm always interested in new opportunities and exciting projects.
-            Let's connect and build something amazing together!
+          <p className="text-gray-400 mb-12 max-w-md mx-auto text-sm leading-relaxed">
+            I'm always open to new opportunities and interesting projects.
+            Let's connect and build something great together.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-8 mb-12">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <a
               href="mailto:babatunde.taiwoadekunle@gmail.com"
-              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0 border border-slate-700/50"
+              className="group flex items-center justify-center gap-3 bg-slate-800/80 border border-slate-700/60 px-6 py-3.5 rounded-xl hover:border-cyan-400/50 hover:bg-slate-700/60 transition-all"
             >
-              <Mail className="text-cyan-400 flex-shrink-0" />
-              <span className="text-sm sm:text-base truncate">
+              <Mail
+                size={17}
+                className="text-cyan-400 flex-shrink-0"
+              />
+              <span className="text-sm text-gray-300 group-hover:text-white transition-colors truncate">
                 babatunde.taiwoadekunle@gmail.com
               </span>
             </a>
@@ -582,35 +788,63 @@ const App = () => {
               href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0 border border-slate-700/50"
+              className="group flex items-center justify-center gap-3 bg-slate-800/80 border border-slate-700/60 px-6 py-3.5 rounded-xl hover:border-cyan-400/50 hover:bg-slate-700/60 transition-all"
             >
-              <Linkedin className="text-cyan-400 flex-shrink-0" />
-              <span className="text-sm sm:text-base">LinkedIn</span>
+              <Linkedin size={17} className="text-cyan-400 flex-shrink-0" />
+              <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
+                LinkedIn
+              </span>
             </a>
             <a
               href="tel:+2347035689102"
-              className="flex items-center space-x-3 bg-slate-800 px-4 sm:px-6 py-3 rounded-lg hover:bg-slate-700 transition-all hover:scale-105 mx-4 sm:mx-0 border border-slate-700/50"
+              className="group flex items-center justify-center gap-3 bg-slate-800/80 border border-slate-700/60 px-6 py-3.5 rounded-xl hover:border-cyan-400/50 hover:bg-slate-700/60 transition-all"
             >
-              <Phone className="text-cyan-400 flex-shrink-0" />
-              <span className="text-sm sm:text-base">+2347035689102</span>
+              <Phone size={17} className="text-cyan-400 flex-shrink-0" />
+              <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
+                +234 703 568 9102
+              </span>
             </a>
           </div>
 
           <button
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all hover:scale-105"
             onClick={downloadCV}
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 px-10 py-4 rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-purple-500/30 hover:scale-105 transition-all duration-200"
           >
             Download Resume
           </button>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* ── Footer ─────────────────────────────────────────────── */}
       <footer className="py-8 px-4 border-t border-slate-800">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-400">
-            © 2025 Babatunde Taiwo A. Built with React and Tailwind CSS.
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-gray-600 text-sm">
+            © 2025 Babatunde Taiwo A. Built with React & Tailwind CSS.
           </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/tbabson"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-white transition-colors"
+            >
+              <Github size={17} />
+            </a>
+            <a
+              href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-white transition-colors"
+            >
+              <Linkedin size={17} />
+            </a>
+            <a
+              href="mailto:babatunde.taiwoadekunle@gmail.com"
+              className="text-gray-600 hover:text-white transition-colors"
+            >
+              <Mail size={17} />
+            </a>
+          </div>
         </div>
       </footer>
     </div>
