@@ -147,8 +147,9 @@ const App = () => {
       description:
         "Full-stack MERN application with user authentication, payment integration via Stripe, and a feature-rich admin dashboard for managing orders and products.",
       tech: ["React", "Node.js", "MongoDB", "Express", "Stripe"],
-      github: "https://github.com/tbabson/mealmaster",
-      live: "https://mealmaster-52wg.onrender.com",
+      githubBackend: "https://github.com/tbabson/mealmaster-backend",
+      githubFrontend: "https://github.com/tbabson/mealmaster-frontend",
+      live: "https://mealmaster-nine.vercel.app/",
       image:
         "https://res.cloudinary.com/dwrmehhg3/image/upload/v1752685116/portfolio/Screenshot-2025-07-16-165659_nw80tt.jpg",
       fallbackColor: "bg-gradient-to-br from-purple-500 to-pink-600",
